@@ -19,10 +19,9 @@ Hello, World!
 
 ## Linux/macOS
 
-POSIX-скрипт `bash scripts/ci.sh` додано; його потрібно виконати на Linux/macOS.
-Локальне WSL-середовище на цьому Windows-хості не має JDK, тому локальний
-POSIX-запуск тут не підтверджений. Результат слід зафіксувати за новим
-GitHub Actions запуском після публікації змін.
+POSIX-скрипт `bash scripts/ci.sh` додано. Його локальний запуск на цьому
+Windows-хості не підтверджений, оскільки WSL-середовище не має JDK. Перевірку
+цих платформ виконав GitHub Actions: Ubuntu та macOS jobs завершилися успішно.
 
 ## GitHub Actions
 
@@ -31,11 +30,10 @@ Workflow `.github/workflows/ci.yml` має одну job із матрицею
 `master` та pull request до цих гілок workflow виконує checkout, налаштовує
 Java 17, викликає платформний build script і завантажує `build/` після успіху.
 
-Попередній успішний запуск
-[41338998745](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41338998745)
-перевіряв попередній стан проєкту, до додавання скриптів, launcher-а й
-`testBasicAddition`; він не є доказом нового workflow. Новий CI результат
-для оновленої гілки додається після завершення workflow.
+Успішний запуск для commit `35406413251fb57fa5fdd30255d34383ada1da36`:
+[GitHub Actions run 41347765956](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41347765956).
+Усі три jobs завершилися успішно: Ubuntu, Windows і macOS. Запуск виконався
+для pull request [#1](https://github.com/oleksandrpikalovki2023/APCS_LAB1/pull/1).
 
 ## Команда orchestrator і read-only check
 
