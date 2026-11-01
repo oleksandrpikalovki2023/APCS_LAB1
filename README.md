@@ -5,6 +5,14 @@ Windows, Linux та macOS. Репозиторій також містить work
 Copilot для Visual Studio Code, skills і prompt-команди для створення та
 перевірки проєкту.
 
+## Дані лабораторної роботи
+
+- Студент: Пікалов О.Ю.
+- Група: КІ-404
+- Варіант 5: Java, Maven, JUnit
+- Тема: AI-агент для створення, складання та CI/CD-перевірки кросплатформного
+  застосунку Hello World.
+
 ## Вимоги
 
 - JDK 17 або новіший
@@ -26,6 +34,8 @@ Copilot для Visual Studio Code, skills і prompt-команди для ств
 `build-and-test` та `github-actions`.
 
 Докладні команди і передумови описано в [`docs/usage.md`](docs/usage.md).
+Архітектура агента, передавання даних між етапами та обробка помилок описані
+у [`docs/architecture.md`](docs/architecture.md).
 
 ## Локальна збірка, тестування та запуск
 
@@ -71,4 +81,3 @@ Workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) запускає
 Фактичні результати перевірок описано у
 [`docs/VERIFICATION.md`](docs/VERIFICATION.md), журнал роботи — у
 [`docs/AI-INTERACTION-LOG.md`](docs/AI-INTERACTION-LOG.md).
-
