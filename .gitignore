@@ -1,5 +1,6 @@
 # Maven build output
 target/
+build/
 
 # IDE and local workspace state
 .idea/
@@ -16,4 +17,3 @@ local.properties
 # Operating-system files
 .DS_Store
 Thumbs.db
-

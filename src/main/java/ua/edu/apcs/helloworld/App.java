@@ -10,8 +10,11 @@ public final class App {
         return GREETING;
     }
 
+    public static int add(int left, int right) {
+        return left + right;
+    }
+
     public static void main(String[] args) {
         System.out.println(greeting());
     }
 }
-

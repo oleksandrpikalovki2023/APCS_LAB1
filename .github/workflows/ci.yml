@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - develop
-      - "feature/**"
+      - master
   pull_request:
     branches:
       - develop
+      - master
 
 permissions:
   contents: read
@@ -35,14 +36,20 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Build, test, and package
-        run: mvn --batch-mode --no-transfer-progress verify
+      - name: Build and test (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: bash scripts/ci.sh
+
+      - name: Build and test (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: scripts\ci.bat
 
       - name: Upload executable JAR
         uses: actions/upload-artifact@v4
         with:
-          name: hello-world-${{ runner.os }}
-          path: target/hello-world-1.0.0.jar
+          name: hello-world-${{ matrix.os }}
+          path: build/
           if-no-files-found: error
           retention-days: 7
-

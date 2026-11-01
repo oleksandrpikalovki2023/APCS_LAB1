@@ -1,63 +1,74 @@
 # Java Hello World з AI-агентом
 
-Кросплатформенний приклад на Java 17. Проєкт збирається у виконуваний JAR,
-має юніт-тест на JUnit 5 і запускає CI на Windows, Linux та macOS.
+Кросплатформенний застосунок Java 17 з Maven, JUnit 5 і GitHub Actions для
+Windows, Linux та macOS. Репозиторій також містить workspace-агента GitHub
+Copilot для Visual Studio Code, skills і prompt-команди для створення та
+перевірки проєкту.
 
 ## Вимоги
 
 - JDK 17 або новіший
 - Apache Maven 3.9 або новіший
-- Visual Studio Code з GitHub Copilot Chat для використання агента
+- Visual Studio Code з GitHub Copilot Chat для роботи з агентом
 
-## Запуск AI-агента
+## Запуск повного сценарію агента
 
 1. Відкрийте кореневу папку репозиторію у VS Code.
-2. Переконайтеся, що GitHub Copilot Chat увімкнений.
-3. У меню вибору агента оберіть **Java Project Builder** з `.github/agents`.
-4. Для відтворення повного сценарію запустіть prompt `/build-cross-platform-java-project`.
-5. Окремі prompts доступні через `/`: створення проєкту, налаштування збірки і
-   тестів, налаштування GitHub Actions, складання, запуск тестів та перевірка JAR.
+2. Увімкніть GitHub Copilot Chat і виберіть агента **Java Project Builder**.
+3. У новому репозиторії запустіть prompt `/init` і передайте назву проєкту,
+   наприклад `hello-world`.
+4. Агент послідовно виконає `git-init`, `create-project`, `create-build`,
+   `create-actions` і завершить read-only перевіркою `check`.
 
-Агент використовує три skills у `.github/skills`: `project-scaffolding`,
-`build-and-test` і `github-actions`. Їхні інструкції, а також команди-prompts,
-знаходяться в репозиторії, тому доступні після відкриття проєкту у VS Code.
+Окремі команди доступні через `/`: `git-init`, `create-project`, `create-build`,
+`create-actions`, `check` та `init`. Вони реалізовані файлами у
+`.github/prompts/`. Три навички у `.github/skills/`: `project-scaffold`,
+`build-and-test` та `github-actions`.
 
-## Збірка, тести та запуск
+Докладні команди і передумови описано в [`docs/usage.md`](docs/usage.md).
 
-У терміналі з кореневої папки проєкту виконайте:
+## Локальна збірка, тестування та запуск
+
+Сценарії збірки перевіряють Java та Maven, запускають Maven `clean verify`,
+створюють виконуваний JAR та кросплатформенний launcher у `build/`, а потім
+перевіряють його вивід `Hello, World!`.
+
+Linux/macOS:
 
 ```shell
-mvn --batch-mode verify
-java -jar target/hello-world-1.0.0.jar
+bash scripts/ci.sh
+./build/hello
 ```
 
-Перша команда компілює код, запускає юніт-тести та створює JAR. Друга запускає
-зібраний застосунок; очікуваний результат:
+Windows PowerShell або Command Prompt:
 
-```text
-Hello, World!
+```powershell
+scripts\ci.bat
+.\build\hello.bat
 ```
 
-У Windows ті самі команди виконуються в PowerShell або Command Prompt. Якщо
-Maven не встановлено, встановіть JDK 17 та Apache Maven перед запуском.
+Після успішної збірки виконуваний JAR доступний як `build/hello.jar`.
+Maven-звіт тестів створюється у `target/surefire-reports/`. Тест
+`testBasicAddition` перевіряє `App.add(2, 3) == 5`.
 
 ## GitHub Actions
 
-Workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) запускає Maven
-`verify` на `windows-latest`, `ubuntu-latest` і `macos-latest` для кожного push
-у `develop` або `feature/**` та для pull request у `develop`. Після успішної
-перевірки виконуваний JAR завантажується як артефакт workflow.
+Workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) запускає одну
+матричну job-задачу на `ubuntu-latest`, `windows-latest` і `macos-latest`.
+Події push для `develop`/`master` та pull request до `develop`/`master`
+викликають лише платформний build script для компіляції, тестування та
+перевірки застосунку. Після успіху workflow завантажує файли з `build/` як
+артефакт job.
 
-## Git-гілки
+## Git-гілки та докази
 
-- `develop` містить інструкції та налаштування AI-агента.
-- `feature/java-hello-world-agent` додає до агента застосунок, тести, CI та
-  документацію.
-- Цільовий pull request: `feature/java-hello-world-agent` → `develop`.
+- `develop` — базові інструкції агента та skills.
+- `feature/java-hello-world-agent` — реалізація проєкту, commands, scripts,
+  workflow і документації.
+- [Pull request #1](https://github.com/oleksandrpikalovki2023/APCS_LAB1/pull/1)
+  з feature до develop.
 
-## Журнал і перевірка
-
-Перебіг роботи та фактичні результати перевірок описані у
-[`docs/AI-INTERACTION-LOG.md`](docs/AI-INTERACTION-LOG.md) і
-[`docs/VERIFICATION.md`](docs/VERIFICATION.md).
+Фактичні результати перевірок описано у
+[`docs/VERIFICATION.md`](docs/VERIFICATION.md), журнал роботи — у
+[`docs/AI-INTERACTION-LOG.md`](docs/AI-INTERACTION-LOG.md).
 

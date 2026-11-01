@@ -4,31 +4,40 @@
 
 ## Запит
 
-Користувач надав вимоги лабораторної: гілки `feature/...` і `develop`, AI-агент
-із щонайменше трьома skills та п'ятьма окремими commands, orchestrator-команда,
-кросплатформенний Hello World, автоматична збірка й тести, CI для Windows/Linux/
-macOS, документація, журнал взаємодії та докази перевірки.
+Реалізувати лабораторний проєкт на Java з AI-агентом, skills, commands та
+orchestrator, Hello World, модульними тестами, кросплатформенним складанням,
+GitHub Actions і супровідною документацією. Пізніше вимоги було уточнено:
+потрібні окремі `git-init`, `create-project`, `create-build`,
+`create-actions`, read-only `check`, orchestrator `init`, скрипти складання,
+`testBasicAddition`, виконуваний launcher у `build/` та CI, що викликає
+скрипти.
 
-Під час уточнення мови користувач обрав Java.
+Користувач обрав Java.
 
 ## Виконані дії
 
-1. Перевірено стан репозиторію: локально початкових комітів і файлів проєкту не
-   було; налаштовано remote `origin`.
-2. У `develop` додано Copilot-інструкції, профіль агента, три skills і шість
-   prompt-команд, включно з повним сценарієм.
-3. Від `develop` створено `feature/java-hello-world-agent` для застосунку,
-   Maven-конфігурації, тесту, CI workflow і документації.
-4. Зібрано та перевірено застосунок командами, результати яких зафіксовано у
-   [`VERIFICATION.md`](VERIFICATION.md).
-5. Першу спробу опублікувати гілки відхилено з GitHub HTTP 403. Після того як
-   користувач оновив автентифікацію, обидві гілки з'явилися на `origin`.
-6. GitHub Actions завершив workflow `Java CI` з успіхом для Windows, Ubuntu та
-   macOS. Запуск: [workflow run 41337670204](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41337670204).
-7. Pull request ще не створено; його можна відкрити зі сторінки порівняння гілок
-   у [GitHub](https://github.com/oleksandrpikalovki2023/APCS_LAB1/compare/develop...feature/java-hello-world-agent).
+1. У гілці `develop` створено базові інструкції Copilot, профіль агента, skills
+   і початкові prompt-команди.
+2. У гілці `feature/java-hello-world-agent` створено Java 17/Maven Hello World,
+   початковий JUnit-тест, CI та документацію; опубліковано PR #1 до `develop`.
+3. Після уточнення вимог доповнено skills прикладами входу, очікуваними
+   результатами, перевірками й сценаріями помилок; додано prompt-команди
+   `git-init`, `create-project`, `create-build`, `create-actions`, `check` та
+   `init`.
+4. Додано `App.add`, тест `testBasicAddition`, `scripts/ci.sh`,
+   `scripts/ci.bat`, шаблони launcher-ів, ігнорування `build/`, а також
+   GitHub Actions, який делегує збірку скриптам.
+5. Додано `docs/usage.md` з точними командами агента й локальної перевірки.
+6. Скрипт `scripts/ci.bat` перевірено локально на Windows: обидва тести
+   проходять, виконуваний JAR запускається і друкує `Hello, World!`.
+7. Раніше успішний CI для трьох ОС стосувався попередньої версії до появи
+   platform scripts. Результати CI після нових змін треба зафіксувати після
+   push оновленої feature-гілки та нового PR-запуску.
 
 ## Межі підтвердження
 
-Цей журнал підсумовує фактичну взаємодію та виконані дії; він не містить
-вигаданих відповідей AI або результатів віддаленого CI.
+Повний prompt `init` і read-only prompt `check` описані, але їх окреме
+наскрізне виконання на чистому репозиторії не заявляється. POSIX build script
+має бути підтверджений на Linux/macOS новим GitHub Actions run; на цьому
+Windows-хості WSL не має встановленої Java. Журнал фіксує фактично виконані
+операції, а не вигадані результати.
