@@ -20,10 +20,14 @@ Hello, World!
 
 ## Перевірка CI
 
-Workflow має три незалежні job-задачі (Windows, Linux, macOS), кожна запускає
-Maven `verify` і після успіху публікує JAR як артефакт. Віддалений статус CI
-поки недоступний: push гілок відхилено GitHub з HTTP 403 (немає права запису до
-`oleksandrpikalovki2023/APCS_LAB1`). Тому віддалені workflow-запуски та артефакти
-ще не створені, а pull request `feature/java-hello-world-agent` → `develop` не
-відкритий. Після надання права запису гілки можна опублікувати, щоб запустити CI.
-Локальне проходження на Windows не є доказом проходження на інших ОС.
+Успішний [запуск Java CI](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41337670204)
+для коміту `3bfcc16afaf71b2a153e90d122e3bd17a706f27c` завершив усі три задачі:
+
+| Платформа | Maven verify | JAR артефакт | Результат |
+|---|---|---|---|
+| `windows-latest` | Успішно | Завантажено | Успішно |
+| `ubuntu-latest` | Успішно | Завантажено | Успішно |
+| `macos-latest` | Успішно | Завантажено | Успішно |
+
+Гілки `develop` і `feature/java-hello-world-agent` опубліковані на GitHub.
+Pull request між ними ще не відкритий; [сторінка створення PR](https://github.com/oleksandrpikalovki2023/APCS_LAB1/compare/develop...feature/java-hello-world-agent).

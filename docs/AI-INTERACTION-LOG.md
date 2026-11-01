@@ -21,12 +21,14 @@ macOS, документація, журнал взаємодії та доказ
    Maven-конфігурації, тесту, CI workflow і документації.
 4. Зібрано та перевірено застосунок командами, результати яких зафіксовано у
    [`VERIFICATION.md`](VERIFICATION.md).
-5. Спроба опублікувати `develop` і `feature/java-hello-world-agent` завершилася
-   помилкою GitHub HTTP 403 (`Permission ... denied`). Через це гілки залишилися
-   локальними; pull request і віддалений запуск GitHub Actions не створені.
+5. Першу спробу опублікувати гілки відхилено з GitHub HTTP 403. Після того як
+   користувач оновив автентифікацію, обидві гілки з'явилися на `origin`.
+6. GitHub Actions завершив workflow `Java CI` з успіхом для Windows, Ubuntu та
+   macOS. Запуск: [workflow run 41337670204](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41337670204).
+7. Pull request ще не створено; його можна відкрити зі сторінки порівняння гілок
+   у [GitHub](https://github.com/oleksandrpikalovki2023/APCS_LAB1/compare/develop...feature/java-hello-world-agent).
 
 ## Межі підтвердження
 
 Цей журнал підсумовує фактичну взаємодію та виконані дії; він не містить
-вигаданих відповідей AI або результатів віддаленого CI. Для публікації потрібен
-обліковий запис із правом запису до GitHub-репозиторію.
+вигаданих відповідей AI або результатів віддаленого CI.
