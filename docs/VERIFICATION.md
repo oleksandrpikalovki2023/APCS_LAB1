@@ -30,7 +30,7 @@ Workflow `.github/workflows/ci.yml` має одну job із матрицею
 `master` та pull request до цих гілок workflow виконує checkout, налаштовує
 Java 17, викликає платформний build script і завантажує `build/` після успіху.
 
-Успішний запуск для поточного commit `d82736f6920d1f2b5ff879296d132da2b55391cc`:
+Успішний запуск для commit `d82736f6920d1f2b5ff879296d132da2b55391cc`:
 [GitHub Actions run 41347954286](https://github.com/oleksandrpikalovki2023/APCS_LAB1/actions/runs/41347954286).
 Усі три jobs завершилися успішно: Ubuntu, Windows і macOS. Для кожної
 платформи завантажено артефакт із `build/`. Запуск виконався для pull request
